@@ -23,13 +23,11 @@
     <script type="text/babel">
         const { useState } = React;
 
-        // GitHub Repository media helper functions
         function buildRepoRawUrl(fileName, branch = 'gh-pages') {
             if (!fileName) return '';
             if (/^https?:\/\//i.test(fileName)) return fileName;
             
             let name = String(fileName).trim();
-            // Automatically append .mp4 if it's a video missing file extension
             if (!/\.[a-z0-9]{1,5}$/i.test(name) && /whatsapp video|video/i.test(name)) {
                 name += '.mp4';
             }
@@ -180,10 +178,6 @@
                     en: "Partial reconstruction of retaining walls and emergency roofing to protect the dormitories of the affected elderly."
                 },
                 mediaFiles: [
-                    "Acabamos de comprar a 50 mt2 de cielorraso en PVC, para contribuir con el montaje de Esta estructura que se va a instalar TOTALMENTE NUEVA en el hogar.jpeg",
-                    "Así quedó el cielorraso del hogar el pasado 10 de Agosto.jpeg",
-                    "Así va el proceso de montaje hoy 18 de Agosto para instalar el nuevo.jpeg",
-                    "Avances hoy viernes 21 agosto 2026 - Fundación Edén del Abuelo.jpeg",
                     "WhatsApp Image 2026-08-21 at 21.34.54 (1).jpeg",
                     "WhatsApp Image 2026-08-21 at 21.34.54.jpeg",
                     "WhatsApp Video 2026-08-21 at 21.34.54 (1).mp4"
@@ -335,7 +329,7 @@
                                 </p>
                             </div>
 
-                            {/* Financial Dashboard - Colombian Flag Order (Yellow, Blue, Red) */}
+                            {/* Financial Dashboard - Yellow, Blue, Red */}
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-stone-100">
                                 <div className="bg-[#FAF8F5] rounded-2xl p-5 border border-stone-200/60 shadow-xs">
                                     <p className="text-xs font-bold text-stone-500 uppercase tracking-wider">{t.total_donations}</p>
@@ -352,7 +346,7 @@
                             </div>
                         </div>
 
-                        {/* Cases Grid */}
+                        {/* Cases Section */}
                         <div className="mt-10">
                             <h3 className="text-xl font-bold text-stone-900 mb-6 flex items-center gap-2">
                                 <span>{t.cases_title}</span>
@@ -391,7 +385,6 @@
                         </div>
                     </main>
 
-                    {/* Modal Details */}
                     {}
                     {selectedCase && (
                         <div className="fixed inset-0 bg-stone-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
