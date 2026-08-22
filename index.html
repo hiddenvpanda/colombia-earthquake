@@ -225,6 +225,38 @@
             }
         ];
 
+        // Helper component to render images/videos correctly, encoding filenames for same-origin access
+        function MediaItem({ file }) {
+            const isExternal = /^https?:\/\//i.test(file);
+            const encoded = isExternal ? file : './' + encodeURIComponent(file);
+            const isVideo = /\.(mp4|webm|mov|ogg)$/i.test(file);
+
+            if (isExternal) {
+                // For external links (Instagram etc.) just show a link and, if it's an embedable URL, open in new tab
+                return (
+                    <div>
+                        {isVideo ? (
+                            <a href={file} target="_blank" rel="noopener noreferrer" className="text-sm text-[#2D2A26] font-medium">Abrir video externo</a>
+                        ) : (
+                            <a href={file} target="_blank" rel="noopener noreferrer"><img src={file} alt={file} className="w-full rounded mt-3 object-contain"/></a>
+                        )}
+                    </div>
+                );
+            }
+
+            return (
+                <div>
+                    {isVideo ? (
+                        <video controls className="w-full rounded mt-3" src={encoded}>
+                            Tu navegador no soporta la reproducción directa.
+                        </video>
+                    ) : (
+                        <img src={encoded} alt={file} className="w-full rounded mt-3 object-contain" />
+                    )}
+                </div>
+            );
+        }
+
         function App() {
             const [selectedCase, setSelectedCase] = useState(null);
             const [copied, setCopied] = useState(false);
@@ -381,7 +413,7 @@
                                                             <div className="flex items-center justify-between">
                                                                 <span className="text-sm font-bold text-[#2D2A26] truncate">📁 {file}</span>
                                                                 <a 
-                                                                    href={file.startsWith('http') ? file : file} 
+                                                                    href={/^https?:\/\//i.test(file) ? file : './' + encodeURIComponent(file)} 
                                                                     target="_blank" 
                                                                     rel="noopener noreferrer"
                                                                     className="bg-[#CE1126] hover:bg-[#B00E1E] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-xs"
@@ -389,6 +421,8 @@
                                                                     {t.open_file}
                                                                 </a>
                                                             </div>
+
+                                                            <MediaItem file={file} />
                                                         </div>
                                                     ))}
                                                 </div>
