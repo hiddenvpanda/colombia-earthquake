@@ -1,543 +1,418 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="bg-[#FDFBF7]">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Colombia Relief Updates</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- React & ReactDOM (UMD Build) -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  
-  <!-- Babel for in-browser JSX compilation -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    body {
-      background-color: #0f172a; /* slate-900 */
-      color: #f1f5f9; /* slate-100 */
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    .fade-in {
-      animation: fadeIn 0.25s ease-out forwards;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0f172a; 
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155; 
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #475569; 
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidos por Colombia - Reporte de Transparencia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html, body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #FDFBF7 !important;
+            color: #2D2A26 !important;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#FDFBF7] text-[#2D2A26] antialiased min-h-screen">
+    <div id="root"></div>
 
-  <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
-
-    const TRANSLATIONS = {
-      es: {
-        heroTag: '🇨🇴 UNIDOS POR COLOMBIA • REPORTE DE TRANSPARENCIA',
-        heroTitle: 'Respuesta Humanitaria y Reconstrucción',
-        heroSubtitle: 'Tu generosidad se traduce en ayuda real, techos seguros y esperanza para las familias afectadas en Colombia.',
-        shareReport: 'Compartir Reporte',
-        linkCopied: '¡Enlace Copiado!',
-        totalRaised: 'Total Donaciones',
-        totalAllocated: 'Presupuesto Asignado',
-        totalPending: 'Fondo Disponible',
-        casesTitle: 'Desglose de Casos Atendidos (Casos 1 al 9)',
-        casesSubtitle: 'Haz clic en cualquier caso para ver los detalles de inspección, presupuestos y evidencias.',
-        modalClose: 'Cerrar Ventana',
-        impactTitle: 'Impacto Directo y Estado Actual',
-        locationLabel: 'Ubicación',
-        amountLabel: 'Monto Asignado',
-        mediaLabel: 'Archivos y Evidencias (Video / Foto)',
-        openNetlify: 'Abrir en GitHub',
-        testLocal: 'Probar archivo local',
-        caseDetails: {
-          1: {
-            title: 'Reconstrucción de Techo en Pereira',
-            location: 'Pereira, Risaralda ☕',
-            name: 'Tío de Ana María Castilla',
-            summary: 'Colapso severo de techos de drywall, escombros pesados y grietas profundas.',
-            impact: 'Evaluación técnica detallada. Las donaciones permitieron la remoción de escombros de drywall y aseguramiento de vigas.',
-            quote: {
-              text: '"Gracias infinitas a cada persona que desde la distancia nos tendió la mano. Ver el techo caer fue devastador, pero saber que no estábamos solos nos dio la fuerza."',
-              author: 'Familia Castilla'
+        const translations = {
+            es: {
+                share: "Compartir Reporte",
+                copied: "¡Enlace Copiado!",
+                hero_badge: "🇨🇴 Sismo Colombia • Transparencia Total",
+                hero_title: "Respuesta Humanitaria y Reconstrucción",
+                hero_desc: "Tu generosidad se traduce en ayuda real, techos seguros y esperanza para las familias afectadas en Colombia.",
+                total_donations: "Total Donaciones",
+                allocated: "Presupuesto Asignado",
+                available: "Fondo Disponible",
+                cases_title: "📋 Casos y Distribución de Ayuda",
+                case: "Caso",
+                view_details: "Ver detalles →",
+                allocation: "Asignación de Fondos",
+                case_summary: "Resumen del Caso",
+                investment_detail: "Detalle de la Inversión",
+                evidence: "Evidencias Multimedia",
+                open_file: "Abrir archivo ↗",
+                close: "Cerrar",
+                lang_toggle: "EN"
             },
-            amount: 300.00,
-            mediaFiles: [{ type: 'video', fileName: 'Caso 1.mp4', label: 'Video de Inspección (48s)' }]
-          },
-          2: {
-            title: 'Acompañamiento In Memóriam',
-            location: 'Cali, Valle del Cauca 🌴',
-            name: 'Ana María y Familia',
-            summary: 'Apoyo humanitario directo e in memóriam en honor a familiares perdidos.',
-            impact: 'Asignación especial de apoyo integral y acompañamiento emocional tras la dolorosa pérdida de seres queridos.',
-            amount: 200.00,
-            isMemorialSpecial: true,
-            mediaFiles: [{ type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.32.32.jpeg', label: 'Foto In Memóriam' }]
-          },
-          3: {
-            title: 'Logística de Colchones y Alimentos',
-            location: 'Cali, Valle del Cauca 🌴',
-            name: 'Logística de Carlos (Cali)',
-            summary: 'Adquisición de colchones impermeables, cobijas, pañales y mercados.',
-            impact: 'Operación logística directa en Cali. Se adquirieron colchonetas hospitalarias plegables y carros de mercado cargados de víveres.',
-            quote: {
-              text: '"Llegar con los colchones, pañales y alimentos listos para entregar en zonas vulnerables fue posible por la rapidez de los fondos."',
-              author: 'Carlos — Logística'
+            en: {
+                share: "Share Report",
+                copied: "Link Copied!",
+                hero_badge: "🇨🇴 Colombia Earthquake • Total Transparency",
+                hero_title: "Humanitarian Response & Reconstruction",
+                hero_desc: "Your generosity translates into real help, safe roofs, and hope for affected families in Colombia.",
+                total_donations: "Total Donations",
+                allocated: "Allocated Budget",
+                available: "Available Fund",
+                cases_title: "📋 Cases and Aid Distribution",
+                case: "Case",
+                view_details: "View details →",
+                allocation: "Fund Allocation",
+                case_summary: "Case Summary",
+                investment_detail: "Investment Detail",
+                evidence: "Multimedia Evidence",
+                open_file: "Open file ↗",
+                close: "Close",
+                lang_toggle: "ES"
+            }
+        };
+
+        const casesData = [
+            {
+                id: 1,
+                title: { es: "Reconstrucción de Techo y Estructura en Pereira", en: "Roof and Structure Reconstruction in Pereira" },
+                location: "Pereira",
+                category: { es: "Vivienda / Techo", en: "Housing / Roof" },
+                amount: "300 USD",
+                summary: { 
+                    es: "Ana Maria Castilla - El tío perdió parte del techo y estructura principal en Pereira tras el sismo.",
+                    en: "Ana Maria Castilla - Her uncle lost part of the roof and main structure in Pereira after the earthquake."
+                },
+                details: {
+                    es: "Los fondos permitieron la compra inmediata de tejas de zinc, madera estructural y clavos para asegurar la vivienda del tío de Ana María antes de la temporada de lluvias.",
+                    en: "The funds allowed for the immediate purchase of zinc roof tiles, structural wood, and nails to secure Ana Maria's uncle's home before the rainy season."
+                },
+                mediaFiles: ["Caso 1.mp4"]
             },
-            amount: 175.00,
-            mediaFiles: [
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.33.37 (3).jpeg', label: 'Colchones apilados listos' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.33.37.jpeg', label: 'Víveres y aseo' }
-            ]
-          },
-          4: {
-            title: 'Sillas de Ruedas para Hospital',
-            location: 'Roldanillo, Valle del Cauca 🌴',
-            name: 'Hospital San Antonio',
-            summary: 'Entrega de sillas de ruedas para el Hospital y adultos mayores en albergue temporal.',
-            impact: 'Apoyo priorizado. En coordinación directa con las enfermeras, se dotó de sillas para mejorar la movilidad de ancianos.',
-            quote: {
-              text: '"Queremos darle las gracias de parte del Hospital por esta gran donación."',
-              author: 'Personal de Enfermería'
+            {
+                id: 2,
+                title: { es: "Apoyo a Familia Afectada en Cali", en: "Support for Affected Family in Cali" },
+                location: "Cali",
+                category: { es: "Apoyo Familiar", en: "Family Support" },
+                amount: "200 USD",
+                summary: {
+                    es: "Ana María - Familia que perdió a seres queridos y su hogar quedó inhabitable.",
+                    en: "Ana María - Family who lost loved ones and whose home became uninhabitable."
+                },
+                details: {
+                    es: "Asistencia directa de emergencia para cubrir necesidades básicas de alimentación y alojamiento temporal mientras se reubican.",
+                    en: "Direct emergency assistance to cover basic needs for food and temporary accommodation while they relocate."
+                },
+                mediaFiles: []
             },
-            amount: 500.00,
-            mediaFiles: [
-              { type: 'video', fileName: 'WhatsApp Video 2026-08-21 at 21.34.02 (1).mp4', label: 'Entrega nocturna (13s)' }
-            ]
-          },
-          5: { 
-            title: 'Cielorraso PVC "El Edén del Abuelo"',
-            location: 'Manizales, Caldas ⛰️', 
-            name: 'Fundación El Edén', 
-            summary: 'Compra e instalación de 50 m² de cielorraso PVC ($1.563.500 COP).',
-            impact: 'Se adquirieron paneles PVC blanco brillante a $32.000 COP/m². Se avanzó en la instalación para 51 adultos mayores.', 
-            quote: {
-              text: '"Acabamos de comprar 50 mt2 de cielorraso en PVC... Mil gracias por su DESINTERESADA Y VALIOSISIMA AYUDA."',
-              author: 'Rodolfo — El Edén del Abuelo'
+            {
+                id: 3,
+                title: { es: "Logística y Transporte de Donaciones en Cali", en: "Logistics and Transport of Donations in Cali" },
+                location: "Cali",
+                category: { es: "Logística", en: "Logistics" },
+                amount: "175 USD",
+                summary: {
+                    es: "Carlos - Alquiler y operación de vehículo en Cali para distribución de donaciones.",
+                    en: "Carlos - Rental and operation of a vehicle in Cali for donation distribution."
+                },
+                details: {
+                    es: "Costos de combustible y transporte terrestre para mover toneladas de suministros humanitarios desde centros de acopio hacia zonas periféricas de difícil acceso.",
+                    en: "Fuel and ground transportation costs to move tons of humanitarian supplies from collection centers to hard-to-reach peripheral areas."
+                },
+                mediaFiles: []
             },
-            amount: 500.00,
-            mediaFiles: [
-              { type: 'video', fileName: 'Avances hoy viernes 21 agosto 2026 - Fundación Edén del Abuelo.mp4', label: 'Recorrido en vivo (98s)' },
-              { type: 'image', fileName: 'Screenshot 2026-08-22 at 10.10.25 AM.png', label: 'Factura de compra' }
-            ]
-          },
-          6: {
-            title: 'Reparación de Vivienda Rural Estela y Ligia',
-            location: 'Manizales (Rural) ⛰️',
-            name: 'Estela y Ligia',
-            summary: 'Resane de grietas y reparación de humedades en vivienda campesina.',
-            impact: 'Asistencia para dos adultas mayores en la zona rural. Compra de cemento, tejas y sellantes.',
-            quote: {
-              text: '"Dios les pague por no olvidarse de las familias del campo."',
-              author: 'Estela'
+            {
+                id: 4,
+                title: { es: "Silla de Ruedas para Comunidad y Hospital", en: "Wheelchair for Community and Hospital" },
+                location: "Roldanillo, Valle",
+                category: { es: "Salud / Movilidad", en: "Health / Mobility" },
+                amount: "500 USD",
+                summary: {
+                    es: "Donación de silla de ruedas especializada para adultos mayores y área de urgencias del hospital local.",
+                    en: "Donation of a specialized wheelchair for seniors and the emergency area of the local hospital."
+                },
+                details: {
+                    es: "Adquisición y entrega formal de una silla de ruedas clínica para mejorar la movilidad de pacientes vulnerables en el centro médico y ancianato municipal.",
+                    en: "Acquisition and formal delivery of a clinical wheelchair to improve mobility for vulnerable patients at the medical center and municipal nursing home."
+                },
+                mediaFiles: []
             },
-            amount: 200.00,
-            mediaFiles: [
-              { type: 'video', fileName: 'Caso 6 - Estela and her mother.mp4', label: 'Video de Daños Estructurales (1m 27s)' }
-            ]
-          },
-          7: {
-            title: 'Apoyo a Arriendo y Reubicación en Cedros',
-            location: 'Cedros de Pereira, Risaralda ☕',
-            name: 'Tío de Ríos',
-            summary: 'Fondo de emergencia por inhabilitación estructural de apartamento en Cedros.',
-            impact: 'Subsidio directo para depósito de arriendo temporal de emergencia tras los daños estructurales documentados en el sector.',
-            amount: 200.00,
-            mediaFiles: [
-              { type: 'instagram', url: 'https://www.instagram.com/reel/DcJs4VwDoH3', label: 'Reporte de Daños en Cedros (Reel)' }
-            ]
-          },
-          8: {
-            title: 'Fondo de Expedición a Chocó',
-            location: 'Pacífico 🌊',
-            name: 'Colectivo Juvenil de Rescate',
-            summary: 'Financiación de combustible y transporte para llevar mercados a comunidades ribereñas.',
-            impact: 'Llegada a zonas apartadas. El fondo financió lanchas y logística terrestre para asistir a familias cuyas viviendas sobre pilotes fueron severamente afectadas.',
-            amount: 500.00,
-            mediaFiles: [
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.36.58 (1).jpeg', label: 'Vivienda colapsada y escombros' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.37.12 (1).jpeg', label: 'Inspección de daños estructurales' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.37.13 (5).jpeg', label: 'Estructuras de madera destruidas' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.37.13 (6).jpeg', label: 'Techo colapsado sobre lanchas' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.37.13 (7).jpeg', label: 'Paredes de metal caídas' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.37.13 (8).jpeg', label: 'Daños en escaleras y muros' },
-              { type: 'image', fileName: 'WhatsApp Image 2026-08-21 at 21.37.13 (9).jpeg', label: 'Muelle destruido por el sismo' }
-            ]
-          },
-          9: {
-            title: 'Atención Médica Joven Madre',
-            location: 'Cali, Valle 🌴',
-            name: 'Madre y 2 Hijos',
-            summary: 'Rehabilitación física especializada y tratamientos ortopédicos.',
-            impact: 'Asignación médica prioritaria para madre herida durante el sismo.',
-            amount: 200.00,
-            mediaFiles: []
-          }
-        }
-      }
-    };
+            {
+                id: 5,
+                title: { es: "Fundación de Adultos Mayores en Manizales", en: "Senior Citizens Foundation in Manizales" },
+                location: "Manizales",
+                category: { es: "Infraestructura", en: "Infrastructure" },
+                amount: "500 USD",
+                summary: {
+                    es: "Fundación que cuida a 51 adultos mayores perdió el segundo piso de su sede.",
+                    en: "Foundation caring for 51 seniors lost the second floor of its headquarters."
+                },
+                details: {
+                    es: "Reconstrucción parcial de muros de contención y techado de emergencia para proteger los dormitorios de los abuelitos afectados.",
+                    en: "Partial reconstruction of retaining walls and emergency roofing to protect the dormitories of the affected elderly."
+                },
+                mediaFiles: []
+            },
+            {
+                id: 6,
+                title: { es: "Estela y su madre Ligia en Zona Rural", en: "Estela and her mother Ligia in Rural Area" },
+                location: "Manizales (Rural)",
+                category: { es: "Vivienda", en: "Housing" },
+                amount: "200 USD",
+                summary: {
+                    es: "Estela y su madre Ligia - Vivienda rural con múltiples grietas estructurales severas.",
+                    en: "Estela and her mother Ligia - Rural home with multiple severe structural cracks."
+                },
+                details: {
+                    es: "Reparación de grietas principales, sellamiento e impermeabilización de paredes para evitar colapsos estructurales por filtración de agua.",
+                    en: "Repair of main cracks, sealing, and waterproofing of walls to prevent structural collapse due to water filtration."
+                },
+                mediaFiles: ["WhatsApp Video 2026-08-21 at 21.35.26.mp4"]
+            },
+            {
+                id: 7,
+                title: { es: "Cedros de Pereira - Tío Perdió Apartamento", en: "Cedros de Pereira - Uncle Lost Apartment" },
+                location: "Pereira (Cedros)",
+                category: { es: "Vivienda", en: "Housing" },
+                amount: "200 USD",
+                summary: {
+                    es: "Tío de Ríos perdió su apartamento por daños severos en la edificación.",
+                    en: "Ríos' uncle lost his apartment due to severe building damage."
+                },
+                details: {
+                    es: "Subsidio de reubicación temporal y rescate de enseres básicos para el núcleo familiar afectado.",
+                    en: "Temporary relocation subsidy and rescue of basic household items for the affected family."
+                },
+                mediaFiles: ["https://www.instagram.com/reel/DcJs4VwDoH3"]
+            },
+            {
+                id: 8,
+                title: { es: "Expedición de Ayuda a Chocó y Buenaventura", en: "Aid Expedition to Chocó and Buenaventura" },
+                location: "Chocó y Buenaventura",
+                category: { es: "Ayuda Humanitaria", en: "Humanitarian Aid" },
+                amount: "500 USD",
+                summary: {
+                    es: "Jóvenes recolectando donaciones para llegar a zonas en Chocó y Buenaventura donde nadie más ha podido ayudar.",
+                    en: "Youth collecting donations to reach areas in Chocó and Buenaventura where no one else has been able to help."
+                },
+                details: {
+                    es: "Financiación de lanchas, combustible y provisiones para llevar alimentos y materiales de reconstrucción a comunidades fluviales y costeras incomunicadas.",
+                    en: "Funding for boats, fuel, and provisions to bring food and reconstruction materials to isolated river and coastal communities."
+                },
+                mediaFiles: [
+                    "WhatsApp Image 2026-08-21 at 21.36.58 (1).jpeg",
+                    "WhatsApp Image 2026-08-21 at 21.37.12 (1).jpeg",
+                    "WhatsApp Image 2026-08-21 at 21.37.13 (5).jpeg",
+                    "WhatsApp Image 2026-08-21 at 21.37.13 (6).jpeg",
+                    "WhatsApp Image 2026-08-21 at 21.37.13 (7).jpeg",
+                    "WhatsApp Image 2026-08-21 at 21.37.13 (8).jpeg",
+                    "WhatsApp Image 2026-08-21 at 21.37.13 (9).jpeg"
+                ]
+            },
+            {
+                id: 9,
+                title: { es: "Madre Soltera con 2 Hijos en Cali", en: "Single Mother with 2 Children in Cali" },
+                location: "Cali (Pendiente)",
+                category: { es: "Apoyo Familiar", en: "Family Support" },
+                amount: "200 USD",
+                summary: {
+                    es: "Joven madre con 2 hijos y dificultades de movilidad debido al impacto del sismo.",
+                    en: "Young mother with 2 children and mobility difficulties due to the earthquake's impact."
+                },
+                details: {
+                    es: "Asignación destinada a garantizar kit de alimentos mensuales y adecuación de espacio seguro de vivienda.",
+                    en: "Allocation intended to guarantee a monthly food kit and adaptation of a safe living space."
+                },
+                mediaFiles: []
+            }
+        ];
 
-    function SmartMediaViewer({ mediaItem, testLocal }) {
-      if (mediaItem.type === 'instagram') {
-        return (
-          <div className="space-y-3 w-full mb-6">
-            <div className="flex flex-wrap justify-between items-center gap-3 bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl shadow-sm">
-              <div className="flex items-center gap-2 text-sm font-bold text-pink-400">
-                <i data-lucide="instagram" className="w-5 h-5"></i>
-                <span>{mediaItem.label}</span>
-              </div>
+        function App() {
+            const [selectedCase, setSelectedCase] = useState(null);
+            const [copied, setCopied] = useState(false);
+            const [lang, setLang] = useState('es');
 
-              <a 
-                href={mediaItem.url} 
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:opacity-90 text-white font-bold px-4 py-2 rounded-xl text-sm transiti[...]
-              >
-                <i data-lucide="external-link" className="w-4 h-4"></i>
-                <span>Ver en Instagram</span>
-              </a>
-            </div>
+            const t = translations[lang];
 
-            <div className="relative rounded-2xl overflow-hidden bg-slate-100 w-full flex items-center justify-center border border-slate-700 shadow-xl">
-              <iframe 
-                src={`${mediaItem.url}/embed`}
-                className="w-full h-[550px] sm:h-[650px] border-0 mx-auto"
-                allowTransparency="true" 
-                allowFullScreen="true"
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
-        );
-      }
+            const handleCopy = () => {
+                navigator.clipboard.writeText(window.location.href);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            };
 
-      const encodedName = encodeURIComponent(mediaItem.fileName);
-      const githubUrl = `./${encodedName}`;
-      
-      const [localUrl, setLocalUrl] = useState(null);
+            const toggleLanguage = () => {
+                setLang(lang === 'es' ? 'en' : 'es');
+            };
 
-      const handleLocalSelect = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          setLocalUrl(URL.createObjectURL(file));
-        }
-      };
-
-      const activeUrl = localUrl || githubUrl;
-
-      return (
-        <div className="space-y-3 w-full mb-6">
-          <div className="flex flex-wrap justify-between items-center gap-3 bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl shadow-sm">
-            <div className="flex items-center gap-2 text-sm font-bold text-amber-300">
-              <i data-lucide={mediaItem.type === 'video' ? 'file-video' : 'image'} className="w-5 h-5"></i>
-              <span>{mediaItem.label}</span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <a 
-                href={githubUrl} 
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-md"
-              >
-                <i data-lucide="external-link" className="w-4 h-4"></i>
-                <span>Abrir en GitHub</span>
-              </a>
-
-              <label className="inline-flex items-center gap-1.5 bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transit[...]
-                <i data-lucide="upload" className="w-4 h-4"></i>
-                <span>{testLocal}</span>
-                <input 
-                  type="file" 
-                  accept={mediaItem.type === 'video' ? "video/*" : "image/*"} 
-                  onChange={handleLocalSelect}
-                  className="hidden" 
-                />
-              </label>
-            </div>
-          </div>
-
-          <div className="relative rounded-2xl overflow-hidden bg-black w-full min-h-[300px] flex items-center justify-center border border-slate-700 shadow-xl">
-            {mediaItem.type === 'video' ? (
-              <video 
-                key={activeUrl}
-                controls 
-                playsInline
-                className="w-full max-h-[500px] object-contain rounded-xl" 
-                src={activeUrl}
-              >
-                Tu navegador no soporta la reproducción directa.
-              </video>
-            ) : (
-              <img 
-                key={activeUrl}
-                src={activeUrl} 
-                alt={mediaItem.label} 
-                className="w-full max-h-[500px] object-contain rounded-xl" 
-              />
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    function App() {
-      const [lang, setLang] = useState('es');
-      const [selectedCase, setSelectedCase] = useState(null);
-      const [copied, setCopied] = useState(false);
-
-      const t = TRANSLATIONS[lang];
-      const caseList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-      // Always re-initialize Lucide icons after rendering
-      useEffect(() => {
-        if (window.lucide) {
-          window.lucide.createIcons();
-        }
-      });
-
-      const handleCopyLink = () => {
-        navigator.clipboard.writeText('https://hiddenvpanda.github.io/colombia-earthquake');
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2500);
-      };
-
-      return (
-        <div className="min-h-screen bg-slate-900 text-slate-100 pb-20">
-          
-          <div className="h-2.5 w-full bg-gradient-to-r from-yellow-400 via-blue-600 to-red-600 shadow-md"></div>
-
-          <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 sm:px-8 py-4 shadow-sm">
-            <div className="max-w-6xl mx-auto flex justify-between items-center gap-2">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-red-500 flex items-center justify-center shadow-lg text-xl">🇨🇴</div>
-                <div>
-                  <h1 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                    Unidos por Colombia
-                    <span className="hidden sm:inline-block text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold uppercase">Reporte Transpa[...]
-                  </h1>
-                  <p className="text-xs text-slate-400 hidden sm:block">GitHub Pages • Transparencia Total</p>
-                </div>
-              </div>
-
-              <button
-                onClick={handleCopyLink}
-                className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-4 py-2 rounded-full text-sm font-bold transition-all shadow-sm"
-              >
-                <i data-lucide={copied ? "check" : "copy"} className="w-4 h-4 text-amber-400"></i>
-                <span className="hidden sm:inline">{copied ? t.linkCopied : t.shareReport}</span>
-              </button>
-            </div>
-          </header>
-
-          <section className="relative overflow-hidden py-14 px-4 bg-gradient-to-b from-slate-900 via-slate-800/50 to-slate-900 border-b border-slate-800">
-            <div className="max-w-4xl mx-auto text-center space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase">
-                <i data-lucide="sparkles" className="w-3.5 h-3.5"></i>
-                {t.heroTag}
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">{t.heroTitle}</h2>
-              <p className="text-slate-400 max-w-2xl mx-auto">{t.heroSubtitle}</p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 max-w-3xl mx-auto">
-                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 shadow-lg">
-                  <div className="text-xs text-slate-400 uppercase font-bold mb-1 flex items-center justify-center gap-1">
-                    <i data-lucide="dollar-sign" className="w-4 h-4 text-emerald-400"></i> {t.totalRaised}
-                  </div>
-                  <div className="text-3xl font-black text-emerald-400">$3,110 <span className="text-sm">USD</span></div>
-                </div>
-                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 shadow-lg">
-                  <div className="text-xs text-slate-400 uppercase font-bold mb-1 flex items-center justify-center gap-1">
-                    <i data-lucide="check-circle-2" className="w-4 h-4 text-amber-400"></i> {t.totalAllocated}
-                  </div>
-                  <div className="text-3xl font-black text-amber-400">$2,775 <span className="text-sm">USD</span></div>
-                </div>
-                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 shadow-lg">
-                  <div className="text-xs text-slate-400 uppercase font-bold mb-1 flex items-center justify-center gap-1">
-                    <i data-lucide="clock" className="w-4 h-4 text-blue-400"></i> {t.totalPending}
-                  </div>
-                  <div className="text-3xl font-black text-blue-400">$335 <span className="text-sm">USD</span></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <main className="max-w-6xl mx-auto px-4 sm:px-8 py-12">
-            <div className="mb-8 text-center sm:text-left">
-              <h3 className="text-3xl font-bold text-white mb-2">{t.casesTitle}</h3>
-              <p className="text-slate-400">{t.casesSubtitle}</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {caseList.map((num) => {
-                const item = t.caseDetails[num];
-                if (!item) return null;
-
-                return (
-                  <button
-                    key={num}
-                    onClick={() => setSelectedCase(num)}
-                    className="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/50 rounded-2xl p-6 transition-all shadow-lg text-left w-full focus:outline-n[...]
-                  >
-                    <div>
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-black px-3 py-1 rounded-full uppercase">
-                          Caso #{num}
-                        </span>
-                        <span className="text-xs text-slate-400 flex items-center gap-1">
-                          <i data-lucide="map-pin" className="w-3.5 h-3.5 text-amber-400"></i>
-                          {item.location.split(',')[0]}
-                        </span>
-                      </div>
-                      <h4 className="text-lg font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-slate-300 line-clamp-3 mb-5">
-                        {item.summary}
-                      </p>
+            return (
+                <div className="min-h-screen pb-16 bg-[#FDFBF7] relative z-50">
+                    <div className="h-3 w-full flex shadow-xs">
+                        <div className="bg-[#FCD116] flex-[2]"></div>
+                        <div className="bg-[#003893] flex-1"></div>
+                        <div className="bg-[#CE1126] flex-1"></div>
                     </div>
 
-                    <div className="pt-4 border-t border-slate-700/80 flex justify-between items-center w-full mt-auto">
-                      <div>
-                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Asignación</span>
-                        <span className="text-lg font-black text-emerald-400">${item.amount.toFixed(2)}</span>
-                      </div>
-                      <div className="flex items-center text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-lg group-hover:bg-amber-500 group-hover:text-slate-900 transition-colo[...]
-                        Ver Detalles <i data-lucide="chevron-right" className="w-4 h-4 ml-1"></i>
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </main>
+                    <header className="max-w-6xl mx-auto px-6 py-6 flex justify-end items-center gap-3">
+                        <button 
+                            onClick={toggleLanguage}
+                            className="bg-white hover:bg-[#F4EFE6] text-[#2D2A26] text-sm font-bold w-12 h-12 rounded-2xl border border-[#EBE3D5] shadow-xs transition flex items-center justify-center cursor-pointer hover:border-[#003893]"
+                        >
+                            {t.lang_toggle}
+                        </button>
+                        <button 
+                            onClick={handleCopy}
+                            className="bg-white hover:bg-[#F4EFE6] text-[#2D2A26] text-sm font-semibold px-5 py-3 rounded-2xl border border-[#EBE3D5] shadow-xs transition flex items-center gap-2 cursor-pointer hover:border-[#CE1126]"
+                        >
+                            <span>{copied ? t.copied : t.share}</span>
+                        </button>
+                    </header>
 
-          {}
-          {selectedCase && t.caseDetails[selectedCase] && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-slate-950/90 backdrop-blur-sm">
-              <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-5xl w-full h-[92vh] flex flex-col shadow-2xl fade-in">
-                
-                <div className="flex-shrink-0 bg-slate-800/90 px-6 py-4 border-b border-slate-700 flex justify-between items-center rounded-t-3xl">
-                  <div className="flex items-center gap-3 truncate pr-4">
-                    <span className="bg-amber-500 text-slate-900 font-black text-xs px-3 py-1 rounded-full shrink-0">
-                      CASO #{selectedCase}
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-bold text-white truncate">
-                      {t.caseDetails[selectedCase].title}
-                    </h3>
-                  </div>
-                  <button
-                    onClick={() => setSelectedCase(null)}
-                    className="p-2 rounded-full bg-slate-700 hover:bg-slate-600 text-white transition-colors shrink-0"
-                  >
-                    <i data-lucide="x" className="w-5 h-5"></i>
-                  </button>
-                </div>
+                    <main className="max-w-6xl mx-auto px-6 mt-2">
+                        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#EBE3D5] shadow-sm relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-80 h-80 bg-[#FCD116]/15 rounded-full blur-3xl pointer-events-none"></div>
+                            
+                            <div className="max-w-2xl relative z-10">
+                                <span className="inline-block bg-[#FCD116]/30 text-[#856404] text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-5 border border-[#FCD116]/50">
+                                    {t.hero_badge}
+                                </span>
+                                <h2 className="text-3xl sm:text-5xl font-extrabold text-[#2D2A26] tracking-tight leading-tight">
+                                    {t.hero_title}
+                                </h2>
+                                <p className="mt-4 text-[#6E675F] text-base sm:text-lg leading-relaxed">
+                                    {t.hero_desc}
+                                </p>
+                            </div>
 
-                <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-8">
-                  
-                  {t.caseDetails[selectedCase].isMemorialSpecial && (
-                    <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center shadow-inner max-w-3xl mx-auto">
-                      <p className="text-lg text-slate-200 font-serif italic mb-4">
-                        "Hicimos hasta lo imposible para lograr recuperarlos. Familia Descansa en Paz 🕊️"
-                      </p>
-                      <div className="text-4xl">🕊️ 🕯️ 🕊️</div>
-                    </div>
-                  )}
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-10 pt-10 border-t border-[#F2EDE4]">
+                                <div className="bg-[#FAF7F2] rounded-2xl p-6 border border-[#EBE3D5]">
+                                    <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.total_donations}</p>
+                                    <p className="text-3xl font-extrabold text-[#003893] mt-1.5">$3,110 <span className="text-lg font-medium text-[#A39A8F]">USD</span></p>
+                                </div>
+                                <div className="bg-[#FAF7F2] rounded-2xl p-6 border border-[#EBE3D5]">
+                                    <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.allocated}</p>
+                                    <p className="text-3xl font-extrabold text-[#CE1126] mt-1.5">$2,775 <span className="text-lg font-medium text-[#A39A8F]">USD</span></p>
+                                </div>
+                                <div className="bg-[#FAF7F2] rounded-2xl p-6 border border-[#EBE3D5]">
+                                    <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.available}</p>
+                                    <p className="text-3xl font-extrabold text-[#B8860B] mt-1.5">$335 <span className="text-lg font-medium text-[#A39A8F]">USD</span></p>
+                                </div>
+                            </div>
+                        </div>
 
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase flex items-center gap-2">
-                      <i data-lucide="folder-open" className="w-4 h-4 text-amber-400"></i>
-                      {t.mediaLabel}
-                    </h4>
+                        <div className="mt-12">
+                            <h3 className="text-2xl font-bold text-[#2D2A26] mb-6 flex items-center gap-2">
+                                <span>{t.cases_title}</span>
+                            </h3>
 
-                    {t.caseDetails[selectedCase].mediaFiles && t.caseDetails[selectedCase].mediaFiles.length > 0 ? (
-                      t.caseDetails[selectedCase].mediaFiles.map((mediaItem, idx) => (
-                        <SmartMediaViewer
-                          key={idx}
-                          mediaItem={mediaItem}
-                          testLocal={t.testLocal}
-                        />
-                      ))
-                    ) : (
-                      <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-8 text-center text-slate-400">
-                        No hay evidencias multimedia registradas en este caso.
-                      </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {casesData.map((item) => (
+                                    <button 
+                                        key={item.id}
+                                        onClick={() => setSelectedCase(item)}
+                                        className="bg-white text-left rounded-3xl p-7 border border-[#EBE3D5] shadow-sm hover:shadow-md hover:border-[#003893]/50 transition-all flex flex-col justify-between group cursor-pointer"
+                                    >
+                                        <div>
+                                            <div className="flex justify-between items-start gap-2 mb-4">
+                                                <span className="bg-[#FAF7F2] text-[#6E675F] text-xs font-bold px-3 py-1.5 rounded-xl border border-[#EBE3D5]">
+                                                    {t.case} #{item.id}
+                                                </span>
+                                                <span className="text-[#003893] bg-[#E6EEF8] font-extrabold text-sm px-3 py-1.5 rounded-xl">
+                                                    {item.amount}
+                                                </span>
+                                            </div>
+                                            <h4 className="font-bold text-[#2D2A26] text-lg leading-snug mb-2.5">
+                                                {item.title[lang]}
+                                            </h4>
+                                            <p className="text-[#6E675F] text-sm line-clamp-2 leading-relaxed">
+                                                {item.summary[lang]}
+                                            </p>
+                                        </div>
+                                        <div className="mt-6 pt-4 border-t border-[#F2EDE4] flex justify-between items-center text-xs font-bold text-[#CE1126]">
+                                            <span>📍 {item.location}</span>
+                                            <span className="group-hover:translate-x-1 transition-transform">{t.view_details}</span>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </main>
+
+                    {selectedCase && (
+                        <div className="fixed inset-0 bg-[#2D2A26]/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+                            <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#EBE3D5]">
+                                <div className="p-8 sm:p-10">
+                                    <div className="flex justify-between items-start gap-4 mb-6">
+                                        <div>
+                                            <span className="bg-[#FCD116]/30 text-[#856404] text-xs font-bold px-3 py-1.5 rounded-full border border-[#FCD116]/50">
+                                                {t.case} #{selectedCase.id} • {selectedCase.category[lang]}
+                                            </span>
+                                            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#2D2A26] mt-3">
+                                                {selectedCase.title[lang]}
+                                            </h3>
+                                            <p className="text-[#8C8377] text-sm mt-1">📍 {selectedCase.location}</p>
+                                        </div>
+                                        <button 
+                                            onClick={() => setSelectedCase(null)}
+                                            className="w-11 h-11 rounded-2xl bg-[#FAF7F2] hover:bg-[#F4EFE6] text-[#6E675F] flex items-center justify-center font-bold text-lg transition cursor-pointer"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+
+                                    <div className="bg-[#FAF7F2] rounded-2xl p-5 my-5 border border-[#EBE3D5]">
+                                        <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.allocation}</p>
+                                        <p className="text-3xl font-extrabold text-[#003893] mt-1">{selectedCase.amount}</p>
+                                    </div>
+
+                                    <div className="space-y-5">
+                                        <div>
+                                            <h4 className="text-xs font-bold text-[#8C8377] uppercase tracking-wider mb-1.5">{t.case_summary}</h4>
+                                            <p className="text-[#2D2A26] text-base font-medium leading-relaxed">{selectedCase.summary[lang]}</p>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-xs font-bold text-[#8C8377] uppercase tracking-wider mb-1.5">{t.investment_detail}</h4>
+                                            <p className="text-[#6E675F] text-sm leading-relaxed">{selectedCase.details[lang]}</p>
+                                        </div>
+
+                                        {selectedCase.mediaFiles.length > 0 && (
+                                            <div className="pt-5 border-t border-[#F2EDE4]">
+                                                <h4 className="text-xs font-bold text-[#8C8377] uppercase tracking-wider mb-3">{t.evidence}</h4>
+                                                <div className="space-y-3">
+                                                    {selectedCase.mediaFiles.map((file, idx) => (
+                                                        <div key={idx} className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#EBE3D5] flex flex-col gap-3">
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-sm font-bold text-[#2D2A26] truncate">📁 {file}</span>
+                                                                <a 
+                                                                    href={file.startsWith('http') ? file : file} 
+                                                                    target="_blank" 
+                                                                    rel="noopener noreferrer"
+                                                                    className="bg-[#CE1126] hover:bg-[#B00E1E] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-xs"
+                                                                >
+                                                                    {t.open_file}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="mt-8 pt-6 border-t border-[#F2EDE4] flex justify-end">
+                                        <button 
+                                            onClick={() => setSelectedCase(null)}
+                                            className="bg-[#2D2A26] hover:bg-[#1A1816] text-white font-semibold px-7 py-3 rounded-xl transition text-sm cursor-pointer shadow-sm"
+                                        >
+                                            {t.close}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     )}
-                  </div>
-
-                  {t.caseDetails[selectedCase].quote && (
-                    <div className="bg-gradient-to-r from-amber-500/10 to-transparent border-l-4 border-amber-500 p-6 rounded-r-2xl">
-                      <p className="text-base font-medium text-slate-200 italic mb-3">
-                        {t.caseDetails[selectedCase].quote.text}
-                      </p>
-                      <p className="text-sm font-bold text-amber-400 uppercase">
-                        — {t.caseDetails[selectedCase].quote.author}
-                      </p>
-                    </div>
-                  )}
-
-                  <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase flex items-center gap-2 mb-3">
-                      <i data-lucide="file-text" className="w-4 h-4 text-amber-400"></i>
-                      {t.impactTitle}
-                    </h4>
-                    <p className="text-slate-200 leading-relaxed">
-                      {t.caseDetails[selectedCase].impact}
-                    </p>
-                  </div>
                 </div>
+            );
+        }
 
-                <div className="flex-shrink-0 bg-slate-800/90 px-6 py-4 border-t border-slate-700 flex justify-between items-center rounded-b-3xl">
-                  <span className="text-sm font-bold text-emerald-400 bg-emerald-400/10 px-4 py-2 rounded-lg border border-emerald-400/20">
-                    Total: ${t.caseDetails[selectedCase].amount.toFixed(2)} USD
-                  </span>
-                  <button
-                    onClick={() => setSelectedCase(null)}
-                    className="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-2.5 rounded-xl transition-all"
-                  >
-                    {t.modalClose}
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          )}
-
-        </div>
-      );
-    }
-
-    // Mount React App
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
 </body>
 </html>
