@@ -1,27 +1,23 @@
 <!DOCTYPE html>
-<html lang="es" class="bg-[#FDFBF7]">
+<html lang="es" class="bg-[#FAF7F2]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unidos por Colombia - Reporte de Transparencia</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React & ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         html, body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #FDFBF7 !important;
+            background-color: #FAF7F2 !important;
             color: #2D2A26 !important;
         }
     </style>
 </head>
-<body class="bg-[#FDFBF7] text-[#2D2A26] antialiased min-h-screen">
+<body class="bg-[#FAF7F2] text-[#2D2A26] antialiased min-h-screen">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -31,9 +27,11 @@
             es: {
                 share: "Compartir Reporte",
                 copied: "¡Enlace Copiado!",
-                hero_badge: "🇨🇴 Sismo Colombia • Transparencia Total",
+                hero_badge: "Sismo Colombia • Transparencia Total",
                 hero_title: "Respuesta Humanitaria y Reconstrucción",
                 hero_desc: "Tu generosidad se traduce en ayuda real, techos seguros y esperanza para las familias afectadas en Colombia.",
+                last_updated: "📅 Última actualización y verificación:",
+                update_date: "22 de Agosto, 2026",
                 total_donations: "Total Donaciones",
                 allocated: "Presupuesto Asignado",
                 available: "Fondo Disponible",
@@ -51,9 +49,11 @@
             en: {
                 share: "Share Report",
                 copied: "Link Copied!",
-                hero_badge: "🇨🇴 Colombia Earthquake • Total Transparency",
+                hero_badge: "Colombia Earthquake • Total Transparency",
                 hero_title: "Humanitarian Response & Reconstruction",
                 hero_desc: "Your generosity translates into real help, safe roofs, and hope for affected families in Colombia.",
+                last_updated: "📅 Last updated and verified:",
+                update_date: "August 22, 2026",
                 total_donations: "Total Donations",
                 allocated: "Allocated Budget",
                 available: "Available Fund",
@@ -85,7 +85,9 @@
                     es: "Los fondos permitieron la compra inmediata de tejas de zinc, madera estructural y clavos para asegurar la vivienda del tío de Ana María antes de la temporada de lluvias.",
                     en: "The funds allowed for the immediate purchase of zinc roof tiles, structural wood, and nails to secure Ana Maria's uncle's home before the rainy season."
                 },
-                mediaFiles: ["Caso 1.mp4"]
+                mediaFiles: [
+                    { name: "Caso 1.mp4", type: "video", date: "21 Ago 2026" }
+                ]
             },
             {
                 id: 2,
@@ -98,10 +100,12 @@
                     en: "Ana María - Family who lost loved ones and whose home became uninhabitable."
                 },
                 details: {
-                    es: "Asistencia directa de emergencia para cubrir necesidades básicas de alimentación y alojamiento temporal mientras se reubican.",
-                    en: "Direct emergency assistance to cover basic needs for food and temporary accommodation while they relocate."
+                    es: "Asistencia directa de emergencia en memoria de los seres queridos, cubriendo necesidades básicas y acompañamiento a los allegados.",
+                    en: "Direct emergency assistance in memory of loved ones, covering basic needs and family support."
                 },
-                mediaFiles: []
+                mediaFiles: [
+                    { name: "WhatsApp Image 2026-08-21 at 21.32.32.jpeg", type: "image", date: "21 Ago 2026" }
+                ]
             },
             {
                 id: 3,
@@ -114,10 +118,17 @@
                     en: "Carlos - Rental and operation of a vehicle in Cali for donation distribution."
                 },
                 details: {
-                    es: "Costos de combustible y transporte terrestre para mover toneladas de suministros humanitarios desde centros de acopio hacia zonas periféricas de difícil acceso.",
+                    es: "Costos de combustible y transporte terrestre para mover toneladas de suministros humanitarios desde centros de acopio hacia zonas periféricas.",
                     en: "Fuel and ground transportation costs to move tons of humanitarian supplies from collection centers to hard-to-reach peripheral areas."
                 },
-                mediaFiles: []
+                mediaFiles: [
+                    { name: "WhatsApp Image 2026-08-21 at 21.33.36 (1).jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.33.36.jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.33.37 (1).jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.33.37 (2).jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.33.37 (3).jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.33.37.jpeg", type: "image", date: "21 Ago 2026" }
+                ]
             },
             {
                 id: 4,
@@ -133,7 +144,10 @@
                     es: "Adquisición y entrega formal de una silla de ruedas clínica para mejorar la movilidad de pacientes vulnerables en el centro médico y ancianato municipal.",
                     en: "Acquisition and formal delivery of a clinical wheelchair to improve mobility for vulnerable patients at the medical center and municipal nursing home."
                 },
-                mediaFiles: []
+                mediaFiles: [
+                    { name: "WhatsApp Video 2026-08-21 at 21.34.02 (1).mp4", type: "video", date: "21 Ago 2026" },
+                    { name: "WhatsApp Video 2026-08-21 at 21.34.02.mp4", type: "video", date: "21 Ago 2026" }
+                ]
             },
             {
                 id: 5,
@@ -146,10 +160,18 @@
                     en: "Foundation caring for 51 seniors lost the second floor of its headquarters."
                 },
                 details: {
-                    es: "Reconstrucción parcial de muros de contención y techado de emergencia para proteger los dormitorios de los abuelitos afectados.",
-                    en: "Partial reconstruction of retaining walls and emergency roofing to protect the dormitories of the affected elderly."
+                    es: "Reconstrucción parcial de muros y cielorraso en PVC para proteger los dormitorios de los abuelitos afectados.",
+                    en: "Partial reconstruction of walls and PVC ceiling to protect the dormitories of the affected elderly."
                 },
-                mediaFiles: []
+                mediaFiles: [
+                    { name: "Acabamos de comprar a 50 mt2 de cielorraso en PVC, para contribuir con el montaje de Esta estructura que se va a instalar TOTALMENTE NUEVA en el hogar.jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "Así quedó el cielorraso del hogar el pasado 10 de Agosto.jpeg", type: "image", date: "10 Ago 2026" },
+                    { name: "Así va el proceso de montaje hoy 18 de Agosto para instalar el nuevo.jpeg", type: "image", date: "18 Ago 2026" },
+                    { name: "Avances hoy viernes 21 agosto 2026 - Fundación Edén del Abuelo.jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.34.54 (1).jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Image 2026-08-21 at 21.34.54.jpeg", type: "image", date: "21 Ago 2026" },
+                    { name: "WhatsApp Video 2026-08-21 at 21.34.54 (1).mp4", type: "video", date: "21 Ago 2026" }
+                ]
             },
             {
                 id: 6,
@@ -285,168 +307,4 @@
                     <header className="max-w-6xl mx-auto px-6 py-6 flex justify-end items-center gap-3">
                         <button 
                             onClick={toggleLanguage}
-                            className="bg-white hover:bg-[#F4EFE6] text-[#2D2A26] text-sm font-bold w-12 h-12 rounded-2xl border border-[#EBE3D5] shadow-xs transition flex items-center justify-center cursor-pointer hover:border-[#003893]"
-                        >
-                            {t.lang_toggle}
-                        </button>
-                        <button 
-                            onClick={handleCopy}
-                            className="bg-white hover:bg-[#F4EFE6] text-[#2D2A26] text-sm font-semibold px-5 py-3 rounded-2xl border border-[#EBE3D5] shadow-xs transition flex items-center gap-2 cursor-pointer hover:border-[#CE1126]"
-                        >
-                            <span>{copied ? t.copied : t.share}</span>
-                        </button>
-                    </header>
-
-                    <main className="max-w-6xl mx-auto px-6 mt-2">
-                        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#EBE3D5] shadow-sm relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-80 h-80 bg-[#FCD116]/15 rounded-full blur-3xl pointer-events-none"></div>
-                            
-                            <div className="max-w-2xl relative z-10">
-                                <span className="inline-block bg-[#FCD116]/30 text-[#856404] text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-5 border border-[#FCD116]/50">
-                                    {t.hero_badge}
-                                </span>
-                                <h2 className="text-3xl sm:text-5xl font-extrabold text-[#2D2A26] tracking-tight leading-tight">
-                                    {t.hero_title}
-                                </h2>
-                                <p className="mt-4 text-[#6E675F] text-base sm:text-lg leading-relaxed">
-                                    {t.hero_desc}
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-10 pt-10 border-t border-[#F2EDE4]">
-                                <div className="bg-[#FAF7F2] rounded-2xl p-6 border border-[#EBE3D5]">
-                                    <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.total_donations}</p>
-                                    <p className="text-3xl font-extrabold text-[#003893] mt-1.5">$3,110 <span className="text-lg font-medium text-[#A39A8F]">USD</span></p>
-                                </div>
-                                <div className="bg-[#FAF7F2] rounded-2xl p-6 border border-[#EBE3D5]">
-                                    <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.allocated}</p>
-                                    <p className="text-3xl font-extrabold text-[#CE1126] mt-1.5">$2,775 <span className="text-lg font-medium text-[#A39A8F]">USD</span></p>
-                                </div>
-                                <div className="bg-[#FAF7F2] rounded-2xl p-6 border border-[#EBE3D5]">
-                                    <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.available}</p>
-                                    <p className="text-3xl font-extrabold text-[#B8860B] mt-1.5">$335 <span className="text-lg font-medium text-[#A39A8F]">USD</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-12">
-                            <h3 className="text-2xl font-bold text-[#2D2A26] mb-6 flex items-center gap-2">
-                                <span>{t.cases_title}</span>
-                            </h3>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {casesData.map((item) => (
-                                    <button 
-                                        key={item.id}
-                                        onClick={() => setSelectedCase(item)}
-                                        className="bg-white text-left rounded-3xl p-7 border border-[#EBE3D5] shadow-sm hover:shadow-md hover:border-[#003893]/50 transition-all flex flex-col justify-between group cursor-pointer"
-                                    >
-                                        <div>
-                                            <div className="flex justify-between items-start gap-2 mb-4">
-                                                <span className="bg-[#FAF7F2] text-[#6E675F] text-xs font-bold px-3 py-1.5 rounded-xl border border-[#EBE3D5]">
-                                                    {t.case} #{item.id}
-                                                </span>
-                                                <span className="text-[#003893] bg-[#E6EEF8] font-extrabold text-sm px-3 py-1.5 rounded-xl">
-                                                    {item.amount}
-                                                </span>
-                                            </div>
-                                            <h4 className="font-bold text-[#2D2A26] text-lg leading-snug mb-2.5">
-                                                {item.title[lang]}
-                                            </h4>
-                                            <p className="text-[#6E675F] text-sm line-clamp-2 leading-relaxed">
-                                                {item.summary[lang]}
-                                            </p>
-                                        </div>
-                                        <div className="mt-6 pt-4 border-t border-[#F2EDE4] flex justify-between items-center text-xs font-bold text-[#CE1126]">
-                                            <span>📍 {item.location}</span>
-                                            <span className="group-hover:translate-x-1 transition-transform">{t.view_details}</span>
-                                        </div>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </main>
-
-                    {selectedCase && (
-                        <div className="fixed inset-0 bg-[#2D2A26]/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-                            <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#EBE3D5]">
-                                <div className="p-8 sm:p-10">
-                                    <div className="flex justify-between items-start gap-4 mb-6">
-                                        <div>
-                                            <span className="bg-[#FCD116]/30 text-[#856404] text-xs font-bold px-3 py-1.5 rounded-full border border-[#FCD116]/50">
-                                                {t.case} #{selectedCase.id} • {selectedCase.category[lang]}
-                                            </span>
-                                            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#2D2A26] mt-3">
-                                                {selectedCase.title[lang]}
-                                            </h3>
-                                            <p className="text-[#8C8377] text-sm mt-1">📍 {selectedCase.location}</p>
-                                        </div>
-                                        <button 
-                                            onClick={() => setSelectedCase(null)}
-                                            className="w-11 h-11 rounded-2xl bg-[#FAF7F2] hover:bg-[#F4EFE6] text-[#6E675F] flex items-center justify-center font-bold text-lg transition cursor-pointer"
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-
-                                    <div className="bg-[#FAF7F2] rounded-2xl p-5 my-5 border border-[#EBE3D5]">
-                                        <p className="text-xs font-bold text-[#8C8377] uppercase tracking-wider">{t.allocation}</p>
-                                        <p className="text-3xl font-extrabold text-[#003893] mt-1">{selectedCase.amount}</p>
-                                    </div>
-
-                                    <div className="space-y-5">
-                                        <div>
-                                            <h4 className="text-xs font-bold text-[#8C8377] uppercase tracking-wider mb-1.5">{t.case_summary}</h4>
-                                            <p className="text-[#2D2A26] text-base font-medium leading-relaxed">{selectedCase.summary[lang]}</p>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-xs font-bold text-[#8C8377] uppercase tracking-wider mb-1.5">{t.investment_detail}</h4>
-                                            <p className="text-[#6E675F] text-sm leading-relaxed">{selectedCase.details[lang]}</p>
-                                        </div>
-
-                                        {selectedCase.mediaFiles.length > 0 && (
-                                            <div className="pt-5 border-t border-[#F2EDE4]">
-                                                <h4 className="text-xs font-bold text-[#8C8377] uppercase tracking-wider mb-3">{t.evidence}</h4>
-                                                <div className="space-y-3">
-                                                    {selectedCase.mediaFiles.map((file, idx) => (
-                                                        <div key={idx} className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#EBE3D5] flex flex-col gap-3">
-                                                            <div className="flex items-center justify-between">
-                                                                <span className="text-sm font-bold text-[#2D2A26] truncate">📁 {file}</span>
-                                                                <a 
-                                                                    href={/^https?:\/\//i.test(file) ? file : './' + encodeURIComponent(file)} 
-                                                                    target="_blank" 
-                                                                    rel="noopener noreferrer"
-                                                                    className="bg-[#CE1126] hover:bg-[#B00E1E] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-xs"
-                                                                >
-                                                                    {t.open_file}
-                                                                </a>
-                                                            </div>
-
-                                                            <MediaItem file={file} />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="mt-8 pt-6 border-t border-[#F2EDE4] flex justify-end">
-                                        <button 
-                                            onClick={() => setSelectedCase(null)}
-                                            className="bg-[#2D2A26] hover:bg-[#1A1816] text-white font-semibold px-7 py-3 rounded-xl transition text-sm cursor-pointer shadow-sm"
-                                        >
-                                            {t.close}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        }
-
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    </script>
-</body>
-</html>
+                            className="bg-white hover:bg-[#F4EFE6] text-[#2D2A26] text-sm font-bold w-12 h-12 rounded-2xl border border-[#EBE3D5] shadow-xs transition flex items-center justify-ce[...]
