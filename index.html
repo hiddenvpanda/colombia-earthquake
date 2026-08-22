@@ -218,7 +218,7 @@
                 href={mediaItem.url} 
                 target="_blank" 
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:opacity-90 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-md"
+                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:opacity-90 text-white font-bold px-4 py-2 rounded-xl text-sm transiti[...]
               >
                 <i data-lucide="external-link" className="w-4 h-4"></i>
                 <span>Ver en Instagram</span>
@@ -239,7 +239,7 @@
       }
 
       const encodedName = encodeURIComponent(mediaItem.fileName);
-      const githubUrl = `https://raw.githubusercontent.com/hiddenvpanda/colombia-earthquake/gh-pages/assets/${encodedName}`;
+      const githubUrl = `https://raw.githubusercontent.com/hiddenvpanda/colombia-earthquake/gh-pages/${encodedName}`;
       
       const [localUrl, setLocalUrl] = useState(null);
 
@@ -271,7 +271,7 @@
                 <span>Abrir en GitHub</span>
               </a>
 
-              <label className="inline-flex items-center gap-1.5 bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-all">
+              <label className="inline-flex items-center gap-1.5 bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transit[...]
                 <i data-lucide="upload" className="w-4 h-4"></i>
                 <span>{testLocal}</span>
                 <input 
@@ -341,7 +341,7 @@
                 <div>
                   <h1 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
                     Unidos por Colombia
-                    <span className="hidden sm:inline-block text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold uppercase">Reporte Transparencia</span>
+                    <span className="hidden sm:inline-block text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold uppercase">Reporte Transpa[...]
                   </h1>
                   <p className="text-xs text-slate-400 hidden sm:block">GitHub Pages • Transparencia Total</p>
                 </div>
@@ -404,7 +404,7 @@
                   <button
                     key={num}
                     onClick={() => setSelectedCase(num)}
-                    className="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/50 rounded-2xl p-6 transition-all shadow-lg text-left w-full focus:outline-none focus:ring-2 focus:ring-amber-500 flex flex-col justify-between h-full"
+                    className="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/50 rounded-2xl p-6 transition-all shadow-lg text-left w-full focus:outline-n[...]
                   >
                     <div>
                       <div className="flex justify-between items-start mb-4">
@@ -429,7 +429,7 @@
                         <span className="text-[10px] text-slate-400 uppercase font-bold block">Asignación</span>
                         <span className="text-lg font-black text-emerald-400">${item.amount.toFixed(2)}</span>
                       </div>
-                      <div className="flex items-center text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-lg group-hover:bg-amber-500 group-hover:text-slate-900 transition-colors">
+                      <div className="flex items-center text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-lg group-hover:bg-amber-500 group-hover:text-slate-900 transition-colo[...]
                         Ver Detalles <i data-lucide="chevron-right" className="w-4 h-4 ml-1"></i>
                       </div>
                     </div>
