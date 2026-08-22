@@ -75,7 +75,7 @@
         locationLabel: 'Ubicación',
         amountLabel: 'Monto Asignado',
         mediaLabel: 'Archivos y Evidencias (Video / Foto)',
-        openNetlify: 'Abrir video / foto en Netlify',
+        openNetlify: 'Abrir en GitHub',
         testLocal: 'Probar archivo local',
         caseDetails: {
           1: {
@@ -204,7 +204,7 @@
       }
     };
 
-    function SmartMediaViewer({ mediaItem, openNetlify, testLocal }) {
+    function SmartMediaViewer({ mediaItem, testLocal }) {
       if (mediaItem.type === 'instagram') {
         return (
           <div className="space-y-3 w-full mb-6">
@@ -239,7 +239,7 @@
       }
 
       const encodedName = encodeURIComponent(mediaItem.fileName);
-      const netlifyLiveUrl = `https://colombiahearthquakehelp.netlify.app/assets/${encodedName}`;
+      const githubUrl = `https://raw.githubusercontent.com/hiddenvpanda/colombia-earthquake/gh-pages/assets/${encodedName}`;
       
       const [localUrl, setLocalUrl] = useState(null);
 
@@ -250,7 +250,7 @@
         }
       };
 
-      const activeUrl = localUrl || netlifyLiveUrl;
+      const activeUrl = localUrl || githubUrl;
 
       return (
         <div className="space-y-3 w-full mb-6">
@@ -262,13 +262,13 @@
 
             <div className="flex flex-wrap items-center gap-2">
               <a 
-                href={netlifyLiveUrl} 
+                href={githubUrl} 
                 target="_blank" 
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-md"
               >
                 <i data-lucide="external-link" className="w-4 h-4"></i>
-                <span>{openNetlify}</span>
+                <span>Abrir en GitHub</span>
               </a>
 
               <label className="inline-flex items-center gap-1.5 bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-all">
@@ -483,7 +483,6 @@
                         <SmartMediaViewer
                           key={idx}
                           mediaItem={mediaItem}
-                          openNetlify={t.openNetlify}
                           testLocal={t.testLocal}
                         />
                       ))
