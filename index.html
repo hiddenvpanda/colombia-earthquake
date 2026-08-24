@@ -196,8 +196,7 @@
                 mediaFiles: [
                     "WhatsApp Image 2026-08-21 at 21.34.54 (1).jpeg",
                     "WhatsApp Image 2026-08-21 at 21.34.54.jpeg",
-                    "WhatsApp Video 2026-08-21 at 21.34.54 (1).mp4",
-                    "Avances hoy viernes 21 agosto 2026 - Fundación Edén del Abuelo.mp4"
+                    "WhatsApp Video 2026-08-21 at 21.34.54 (1).mp4"
                 ]
             },
             {
@@ -508,25 +507,21 @@
                                                     {selectedCase.mediaFiles.map((file, idx) => {
                                                         const rawUrl = buildRepoRawUrl(file);
                                                         const isVideo = isVideoFile(file);
-                                                        const isInstagram = file.includes('instagram.com');
 
                                                         return (
                                                             <div key={idx} className="bg-[#FAF8F5] p-3 rounded-2xl border border-stone-300/80 flex flex-col gap-3">
-                                                                <div className="flex items-center justify-between text-xs font-bold text-stone-600">
-                                                                    <span className="truncate pr-2 font-mono text-[11px] text-stone-500">{file}</span>
-                                                                    {!isInstagram && (
-                                                                        <a 
-                                                                            href={rawUrl} 
-                                                                            target="_blank" 
-                                                                            rel="noopener noreferrer"
-                                                                            className="bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-black px-3.5 py-1.5 rounded-xl transition shadow-2xs shrink-0"
-                                                                        >
-                                                                            {t.open_file}
-                                                                        </a>
-                                                                    )}
+                                                                <div className="flex items-center justify-end text-xs font-bold text-stone-600">
+                                                                    <a 
+                                                                        href={rawUrl} 
+                                                                        target="_blank" 
+                                                                        rel="noopener noreferrer"
+                                                                        className="bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-black px-3.5 py-1.5 rounded-xl transition shadow-2xs shrink-0"
+                                                                    >
+                                                                        {t.open_file}
+                                                                    </a>
                                                                 </div>
 
-                                                                {isInstagram ? (
+                                                                {file.includes('instagram.com') ? (
                                                                     <div className="bg-stone-900 text-white p-4 rounded-xl text-center text-sm">
                                                                         <a href={file} target="_blank" rel="noopener noreferrer" className="underline font-bold text-amber-400">
                                                                             View Reel on Instagram ↗
